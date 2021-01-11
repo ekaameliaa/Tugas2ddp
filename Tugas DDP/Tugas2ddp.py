@@ -38,28 +38,17 @@ while True:
         print('*** TARIK TUNAI ***')
         rek_tarik = input("Masukkan nomor rekening: ")
         nominal_tarik = eval(input("Masukkan nominal yang akan ditarik: "))
-        #if no_rek and nom == norek :
-            #file_n = open('nasabah.txt', 'a+')
-            #print('Tarik tunai sebesar ', nom, ' dari rekening ', no_rek, ' berhasil')
-            #file_n.write(norek + "," + name + "," + str(setoran_awal - nom) + '\n')
-            #file_n.close()
-        if rek_tarik in dataNasabah2:
-            for i in dataNasabah:
-                if i[0] == rek_tarik:
-                    if nominal_tarik > i[2]:
-                        print("Saldo tidak mencukupi. Tarik tunai gagal.")
-                        break
-                    else:
-                        i[2] -= nominal_tarik
-                        file_n = open('nasabah.txt', 'w')
-                        file_n.write(norek + "," + name + "," + str(setoran_awal - nominal) + '\n')
-                        file_n.close()
-                        #with open('nasabah.txt', 'w') as f:
-                         #   f.write(
-                          #      '\n'.join(map(lambda x: ','.join(map(str, x)),  dataNasabah)))
-                        #f.close()
-                        print("Tarik tunai sebesar", nominal_tarik,
-                              "dari rekening", rek_tarik, "berhasil.\n")
-                        break
+        total_nominal = setoran_awal + nominal
+        if norek == rek_tarik:
+            if nominal_tarik > total_nominal:
+                print("Saldo tidak mencukupi. Tarik tunai gagal.")
+                break
+            else:
+                total_nominal -= nominal_tarik
+                file_n = open('nasabah.txt', 'w')
+                file_n.write(norek + "," + name + "," + str(setoran_awal - nominal) + '\n')
+                file_n.close()
+                print("Tarik tunai sebesar", nominal_tarik, "dari rekening", rek_tarik, "berhasil.")
+                break
         else:
             print("Nomor rekening tidak terdaftar. Tarik tunai gagal.")
